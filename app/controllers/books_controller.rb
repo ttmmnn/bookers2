@@ -8,16 +8,31 @@ class BooksController < ApplicationController
   end
 
   def index
-    # createアクションでredirect_toをするためのインスタン変数
+    # createアクションでredirect_toをするためのインスタンス変数
     @book = Book.new
-
     @books = Book.all
   end
 
   def show
     @book =Book.find(params[:id])
   end
-  
+
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    book = Book.find(params[:id])
+    book.update(book_params)
+    redirect_to book_path
+  end
+
+  def destroy
+    book = Book.find(params[:id])
+    book.delete
+    redirect_to books_path
+  end
+
 end
 
 private
